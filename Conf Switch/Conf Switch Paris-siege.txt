@@ -1,0 +1,42 @@
+en 
+conf t 
+hostname Switch-paris
+Vlan 1010
+name Direction
+
+Vlan 1011
+name Compta
+
+Vlan 1012
+name Guests
+
+Vlan 1013
+name Etudes
+
+Vlan 1014
+name Commercial
+
+
+interface range e0/0-1
+switchport mode trunk
+
+
+interface e0/2
+switchport access vlan 1010
+switchport mode access
+
+interface 0/3
+switchport access vlan 1011
+switchport mode access
+
+interface 0/4
+switchport access vlan 1012
+switchport mode access
+
+interface 0/5
+switchport access vlan 1013
+switchport mode access
+
+interface 0/6
+switchport access vlan 1014
+switchport mode access

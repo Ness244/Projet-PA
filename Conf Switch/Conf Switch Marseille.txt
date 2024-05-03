@@ -1,0 +1,28 @@
+en 
+conf
+
+Vlan 1020
+name Direction
+
+Vlan 1021
+name Production
+
+Vlan 1022
+name Guests
+
+
+interface e0/0-1
+switchport mode trunk 
+
+
+interface e0/2
+switchport access vlan 1020
+switchport mode access
+
+interface 0/3
+switchport access vlan 1021
+switchport mode access
+
+interface 0/4
+switchport access vlan 1022
+switchport mode access

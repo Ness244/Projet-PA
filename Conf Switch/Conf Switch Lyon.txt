@@ -1,0 +1,25 @@
+Vlan 1030
+name Direction
+
+Vlan 1031
+name Production
+
+Vlan 1032
+name Guests
+
+interface e0/0-1
+switchport mode trunk 
+
+
+interface e0/2
+switchport access vlan 1030
+switchport mode access
+
+interface 0/3
+switchport access vlan 1031
+switchport mode access
+
+interface 0/4
+switchport access vlan 1032
+switchport mode access
+
