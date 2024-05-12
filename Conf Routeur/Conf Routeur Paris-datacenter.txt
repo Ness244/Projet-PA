@@ -11,6 +11,10 @@ interface e0/1
 ip address 10.254.254.1 255.255.255.252
 no sh 
 
+interface e0/2
+ip address 10.254.254.1 255.255.255.252
+no sh 
+
 
 router ospf 1
 network 10.254.254.0 0.0.0.3 area 0
@@ -18,5 +22,5 @@ network 10.254.254.0 0.0.0.3 area 0
 router ospf 100
 network 11.10.1.0 0.0.0.255 area 1 
 
-router ospf 1
-redistribute ospf 100 subnets
+router ospf 100
+redistribute ospf 1 subnets
