@@ -8,15 +8,18 @@ ip address 11.10.1.251 255.255.255.0
 no sh
 
 interface e0/1
-ip address 10.254.254.1 255.255.255.252
+ip address 10.254.254.2 255.255.255.252
+description INTERCOROUTEUR1 vers pfsense 1
 no sh 
 
 interface e0/2
-ip address 10.254.254.1 255.255.255.252
+ip address 10.254.254.14 255.255.255.252
+description INTERCOROUTEUR2 vers pfsense2
 no sh 
 
 
 router ospf 1
+redistribute ospf 100 subnets
 network 10.254.254.0 0.0.0.3 area 0
 
 router ospf 100
@@ -24,3 +27,4 @@ network 11.10.1.0 0.0.0.255 area 1
 
 router ospf 100
 redistribute ospf 1 subnets
+default-information originate metric 200
