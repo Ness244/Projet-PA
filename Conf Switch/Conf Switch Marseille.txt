@@ -16,13 +16,15 @@ switchport mode trunk
 
 
 interface e0/2
-switchport access vlan 1020
+switchport access vlan 1022
 switchport mode access
 
-interface 0/3
+interface e0/3
 switchport access vlan 1021
 switchport mode access
 
-interface 0/4
-switchport access vlan 1022
+interface e1/3
+switchport access vlan 1020
 switchport mode access
+
+

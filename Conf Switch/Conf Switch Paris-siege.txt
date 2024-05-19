@@ -21,22 +21,22 @@ interface range e0/0-1
 switchport mode trunk
 
 
-interface e0/2
+interface e1/3
 switchport access vlan 1010
 switchport mode access
 
-interface 0/3
+interface e0/3
 switchport access vlan 1011
 switchport mode access
 
-interface 0/4
+interface e0/2
 switchport access vlan 1012
 switchport mode access
 
-interface 0/5
+interface e1/2
 switchport access vlan 1013
 switchport mode access
 
-interface 0/6
+interface e1/1
 switchport access vlan 1014
 switchport mode access
