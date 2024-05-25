@@ -1,42 +1,99 @@
-en 
-conf t 
-hostname Switch-paris
-Vlan 1010
-name Direction
 
-Vlan 1011
-name Compta
-
-Vlan 1012
-name Guests
-
-Vlan 1013
-name Etudes
-
-Vlan 1014
-name Commercial
-
-
-interface range e0/0-1
-switchport mode trunk
-
-
-interface e1/3
-switchport access vlan 1010
-switchport mode access
-
-interface e0/3
-switchport access vlan 1011
-switchport mode access
-
-interface e0/2
-switchport access vlan 1012
-switchport mode access
-
-interface e1/2
-switchport access vlan 1013
-switchport mode access
-
-interface e1/1
-switchport access vlan 1014
-switchport mode access
+!
+! Last configuration change at 12:58:46 UTC Sun May 19 2024
+!
+hostname Switch
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+vlan 2001-2003,2010,2020 
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ no shutdown
+!
+interface Ethernet0/1
+ no shutdown
+!
+interface Ethernet0/2
+ no shutdown
+!
+interface Ethernet0/3
+ no shutdown
+!
+interface Ethernet1/0
+ no shutdown
+!
+interface Ethernet1/1
+ no shutdown
+!
+interface Ethernet1/2
+ no shutdown
+!
+interface Ethernet1/3
+ no shutdown
+!
+interface Ethernet2/0
+ no shutdown
+!
+interface Ethernet2/1
+ no shutdown
+!
+interface Ethernet2/2
+ no shutdown
+!
+interface Ethernet2/3
+ no shutdown
+!
+interface Ethernet3/0
+ no shutdown
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface Ethernet3/1
+ no shutdown
+!
+interface Ethernet3/2
+ no shutdown
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface Ethernet3/3
+ no shutdown
+!
+ip forward-protocol nd
+!
+ip http server
+!
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+!
+!
+!
+end

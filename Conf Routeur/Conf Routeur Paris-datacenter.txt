@@ -1,30 +1,125 @@
-en
-conf t
+
+!
+! Last configuration change at 16:56:28 UTC Sat May 25 2024
+!
+h
+!
+! Last configuration change at 16:56:28 UTC Sat May 25 2024
+!
+version 15.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
 hostname routeur-Paris-datacenter
-ip routing 
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
 
-interface e0/0  
-ip address 11.10.1.251 255.255.255.0
-no sh
 
-interface e0/1
-ip address 10.254.254.2 255.255.255.252
-description INTERCOROUTEUR1 vers pfsense 1
-no sh 
-
-interface e0/2
-ip address 10.254.254.14 255.255.255.252
-description INTERCOROUTEUR2 vers pfsense2
-no sh 
-
-
+!
+!
+!
+!
+no ip domain lookup
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+redundancy
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ no shutdown
+ ip address 11.10.1.251 255.255.255.0
+!
+interface Ethernet0/1
+ no shutdown
+ description INTERCOROUTEUR1 vers pfsense 1
+ ip address 10.254.254.2 255.255.255.252
+!
+interface Ethernet0/2
+ no shutdown
+ description INTERCOROUTEUR2 vers pfsense2
+ ip address 10.254.254.14 255.255.255.252
+!
+interface Ethernet0/3
+ no shutdown
+ no ip address
+ shutdown
+!
 router ospf 1
-redistribute ospf 100 subnets
-network 10.254.254.0 0.0.0.3 area 0
-
+ redistribute ospf 100 subnets
+ network 10.254.254.0 0.0.0.3 area 0
+ network 10.254.254.12 0.0.0.3 area 0
+!
 router ospf 100
-network 11.10.1.0 0.0.0.255 area 1 
-
-router ospf 100
-redistribute ospf 1 subnets
-default-information originate metric 200
+ redistribute ospf 1 subnets
+ network 11.10.1.0 0.0.0.255 area 1
+ default-information originate metric 200
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login
+ transport input none
+!
+!
+end

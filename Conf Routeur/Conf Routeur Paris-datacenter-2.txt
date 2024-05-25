@@ -1,0 +1,44 @@
+
+!
+! Last configuration change at 13:49:44 UTC Sun May 19 2024
+!
+hostname routeur-paris-datacenter2
+!
+interface Ethernet0/0
+ no shutdown
+ description MPLS
+ ip address 11.10.1.247 255.255.255.0
+!
+interface Ethernet0/1
+ no shutdown
+ description Interco-Routeur1-pf2
+ ip address 10.254.254.10 255.255.255.252
+!
+interface Ethernet0/2
+ no shutdown
+ description Interco-routeur2-pf1
+ ip address 10.254.254.6 255.255.255.252
+!
+interface Ethernet0/3
+ no shutdown
+ no ip address
+ shutdown
+!
+router ospf 1
+ redistribute ospf 100 subnets
+ network 10.254.254.4 0.0.0.3 area 0
+ network 10.254.254.8 0.0.0.3 area 0
+!
+router ospf 100
+ redistribute ospf 1 subnets
+ network 11.10.1.0 0.0.0.255 area 1
+ default-information originate metric 300
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+!
+end

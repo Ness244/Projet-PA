@@ -1,50 +1,61 @@
 enable
-configure terminal
+
+!
+! Last configuration change at 16:43:55 UTC Tue May 21 2024
+!
 hostname routeur-marseille
-ip routing
-
-interface range e0/0-3
-no shutdown
-exit
-
-interface e0/0
-ip address 11.10.1.253 255.255.255.0
-no shutdown
-exit
-
-interface e0/1.20
-encapsulation dot1Q 1020
-ip address 192.168.20.254 255.255.255.0
-standby 1 ip 192.168.20.1
-standby 1 priority 150
-standby 1 preempt
-no shutdown
-exit
-
-interface e0/1.21
-encapsulation dot1Q 1021
-ip address 192.168.21.254 255.255.255.0
-standby 1 ip 192.168.21.1
-standby 1 priority 150
-standby 1 preempt
-no shutdown
-exit
-
-interface e0/1.22
-encapsulation dot1Q 1012
-ip address 192.168.22.254 255.255.255.0
-standby 1 ip 192.168.22.1
-standby 1 priority 150
-standby 1 preempt
-no shutdown
-exit
-
+!
+interface Ethernet0/0
+ no shutdown
+ ip address 11.10.1.253 255.255.255.0
+!
+interface Ethernet0/1
+ no shutdown
+ no ip address
+!
+interface Ethernet0/1.20
+ no shutdown
+ encapsulation dot1Q 1020
+ ip address 192.168.20.254 255.255.255.0
+ standby 1 ip 192.168.20.1
+ standby 1 priority 150
+ standby 1 preempt
+!
+interface Ethernet0/1.21
+ no shutdown
+ encapsulation dot1Q 1021
+ ip address 192.168.21.254 255.255.255.0
+ standby 1 ip 192.168.21.1
+ standby 1 priority 150
+ standby 1 preempt
+!
+interface Ethernet0/1.22
+ no shutdown
+ encapsulation dot1Q 1012
+ ip address 192.168.22.254 255.255.255.0
+ standby 1 ip 192.168.22.1
+ standby 1 priority 150
+ standby 1 preempt
+!
+interface Ethernet0/2
+ no shutdown
+ no ip address
+!
+interface Ethernet0/3
+ no shutdown
+ no ip address
+!
 router ospf 100
-network 11.10.1.0 0.0.0.255 area 1
-network 192.168.20.0 0.0.0.255 area 1
-network 192.168.21.0 0.0.0.255 area 1
-network 192.168.22.0 0.0.0.255 area 1
-exit
-
+ network 11.10.1.0 0.0.0.255 area 1
+ network 192.168.20.0 0.0.0.255 area 1
+ network 192.168.21.0 0.0.0.255 area 1
+ network 192.168.22.0 0.0.0.255 area 1
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+!
 end
-write memory

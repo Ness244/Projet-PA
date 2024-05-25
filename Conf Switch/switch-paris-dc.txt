@@ -1,23 +1,66 @@
 
 !
-! Last configuration change at 15:12:45 UTC Sun May 19 2024
+! Last configuration change at 15:36:57 UTC Sun May 19 2024
 !
-hostname switch-marseille
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname switch-paris
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
 !
 spanning-tree mode pvst
 spanning-tree extend system-id
 !
 !
-vlan 1020
+vlan 1010
  name Direction
 !
-vlan 1021
+vlan 1011
  name Production
 !
-vlan 1022
+vlan 1012
  name Guests
 !
+vlan 1013
+ name Etudes
+!
+vlan 1014
+ name Commercial
+!
 ! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
 interface Ethernet0/0
  no shutdown
  switchport trunk encapsulation dot1q
@@ -30,12 +73,12 @@ interface Ethernet0/1
 !
 interface Ethernet0/2
  no shutdown
- switchport access vlan 1022
+ switchport access vlan 1012
  switchport mode access
 !
 interface Ethernet0/3
  no shutdown
- switchport access vlan 1021
+ switchport access vlan 1011
  switchport mode access
 !
 interface Ethernet1/0
@@ -43,13 +86,17 @@ interface Ethernet1/0
 !
 interface Ethernet1/1
  no shutdown
+ switchport access vlan 1014
+ switchport mode access
 !
 interface Ethernet1/2
  no shutdown
+ switchport access vlan 1013
+ switchport mode access
 !
 interface Ethernet1/3
  no shutdown
- switchport access vlan 1020
+ switchport access vlan 1010
  switchport mode access
 !
 interface Ethernet2/0
@@ -78,10 +125,24 @@ interface Ethernet3/3
 !
 ip forward-protocol nd
 !
-no ip http server
+ip http server
 !
 ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
 ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login
+!
 !
 !
 end
