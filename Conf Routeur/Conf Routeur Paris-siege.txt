@@ -1,0 +1,65 @@
+!
+hostname routeur-paris-siege
+!
+interface Ethernet0/0
+ ip address 11.10.1.254 255.255.255.0
+!         
+interface Ethernet0/1
+ no ip address
+!         
+interface Ethernet0/1.10
+ encapsulation dot1Q 1010
+ ip address 192.168.10.254 255.255.255.0
+ standby 1 ip 192.168.10.1
+ standby 1 priority 150
+ standby 1 preempt
+!         
+interface Ethernet0/1.11
+ encapsulation dot1Q 1011
+ ip address 192.168.11.254 255.255.255.0
+ standby 1 ip 192.168.11.1
+ standby 1 priority 150
+ standby 1 preempt
+!         
+interface Ethernet0/1.12
+ encapsulation dot1Q 1012
+ ip address 192.168.12.254 255.255.255.0
+ standby 1 ip 192.168.12.1
+ standby 1 priority 150
+ standby 1 preempt
+!         
+interface Ethernet0/1.13
+ encapsulation dot1Q 1013
+ ip address 192.168.13.254 255.255.255.0
+ standby 1 ip 192.168.13.1
+ standby 1 priority 150
+ standby 1 preempt
+!         
+interface Ethernet0/1.14
+ encapsulation dot1Q 1014
+ ip address 192.168.14.254 255.255.255.0
+ standby 1 ip 192.168.14.1
+ standby 1 priority 150
+ standby 1 preempt
+!         
+interface Ethernet0/2
+ no ip address
+!         
+interface Ethernet0/3
+ no ip address
+!         
+router ospf 100
+ network 11.10.1.0 0.0.0.255 area 1
+ network 192.168.10.0 0.0.0.255 area 1
+ network 192.168.11.0 0.0.0.255 area 1
+ network 192.168.12.0 0.0.0.255 area 1
+ network 192.168.13.0 0.0.0.255 area 1
+ network 192.168.14.0 0.0.0.255 area 1
+!         
+ip forward-protocol nd
+!         
+!         
+no ip http server
+no ip http secure-server
+!
+end       
